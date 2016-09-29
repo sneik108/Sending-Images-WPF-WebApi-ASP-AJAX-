@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+</head>
+<body>
+    <div id="status">
+
+    </div>
+    <div id="image"> 
+        @Html.Partial("Image")
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            setInterval(function () {
+                $.ajax({
+                    url: "http://localhost:51537/api/savefile",
+                    type: "GET",
+                    success: function (data, status) {
+                        $("#image").load("/Home/GetImage");
+                        $("#status").empty().append(status);
+                    }
+
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
